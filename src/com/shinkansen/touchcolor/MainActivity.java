@@ -3,10 +3,12 @@ package com.shinkansen.touchcolor;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,6 +17,7 @@ import android.widget.Gallery;
 import com.shinkansen.touchcolor.adapter.ImageAdapter;
 import com.shinkansen.touchcolor.adapter.ImageViewPagerAdapter;
 import com.shinkansen.touchcolor.datahelper.RelateObjectDataSource;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -62,6 +65,18 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch(item.getItemId()){
+		case R.id.action_about:
+			showDialogAbout();
+        return true;
+		case R.id.action_manual:
+			showDialogManual();
+        return true;
+		}
+		return false;
+	}
 	
 	/**
 	 Event when button click
@@ -84,7 +99,6 @@ public class MainActivity extends Activity {
 			break;
 		}
 	}
-	
 	/**
 	 Show popup Image
 	@param imageResource: id of image; position: index of image
@@ -106,5 +120,40 @@ public class MainActivity extends Activity {
     	dialog.show();
     	
     }
+	/**
+	 Menu show dialog
+	@param
+	@author congthang
+	*/
+	public void showDialogAbout(){
+		AlertDialog.Builder b=new AlertDialog.Builder(MainActivity.this);
+		 
+		b.setTitle("About");
+		b.setMessage("Sinkansen team");
+		b.setPositiveButton("OK", new DialogInterface. OnClickListener() {
+		@Override
+		public void onClick(DialogInterface dialog, int which)
+		{
+			dialog.cancel();
+		}});
 
+		b.create().show();
+	}
+	public void showDialogManual(){
+	AlertDialog.Builder b=new AlertDialog.Builder(MainActivity.this);
+	 
+	b.setTitle("Manual");
+	b.setMessage("I don't know!");
+	b.setPositiveButton("OK", new DialogInterface. OnClickListener() {
+	@Override
+	public void onClick(DialogInterface dialog, int which)
+	{
+		dialog.cancel();
+	}});
+
+	b.create().show();
+}
+	
+	
+	
 }
