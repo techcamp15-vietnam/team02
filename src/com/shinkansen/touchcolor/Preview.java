@@ -122,7 +122,11 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
     }
     
 
-    
+    /**
+	Save bitmap image from camera to the static value 
+	@param  
+	@author duythanh
+	*/
     public static Bitmap  bitmap;
     PictureCallback pictureCallback = new PictureCallback() {
 		
@@ -152,14 +156,15 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 			Log.i(TAG, "onShutter");
 		}
 	};
+	
     public void takePicture(){
     	if(mCamera == null){
     		return;
     	}
-//    	deletePhoto();
     	mCamera.takePicture(shutterCallback, rawCallback, pictureCallback);
     }
 
+    
     private String createFileName(){
     	
     	String state = Environment.getExternalStorageState();

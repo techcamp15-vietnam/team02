@@ -12,6 +12,7 @@ import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Display;
@@ -79,19 +80,7 @@ public class MainActivity extends Activity {
 		txtColorName.setTextColor(Color.parseColor(colorString));
 		
 		relateObject = new RelateObjectDataSource(this);
-		
-		/**
-		 * test add data
-		 * 
-		RelateObject testObj = new RelateObject();
-		testObj.setRObjId(2);
-		testObj.setObjectColor("Blue");
-		testObj.setObjectName("Ball");
-		testObj.setObjectImageName("ball");
-		
-		relateObject.addRelateObject(testObj);*/
-		
-		
+				
 		Gallery gallery = (Gallery) findViewById(R.id.gallery);
 		gallery.setAdapter(new ImageAdapter(this, pics));
 		gallery.setOnItemClickListener(new OnItemClickListener() {
@@ -104,7 +93,12 @@ public class MainActivity extends Activity {
         });
 	}
 	
-
+	/**
+	 On touch screen, get color of the position
+	@param:
+	@author duythanh
+	*/
+	
 	OnTouchListener ontch = new OnTouchListener() {
 
 		@Override
@@ -114,55 +108,42 @@ public class MainActivity extends Activity {
 			y = (int)event.getY();
 			
 			switch (event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				//Display display = getWindowManager().getDefaultDisplay();
-				//size = new Point();
-				//display.getSize(size);
+				case MotionEvent.ACTION_DOWN:
+				
+				Display display = getWindowManager().getDefaultDisplay();
+				size = new Point();
+				display.getSize(size);
 				mPreview.takePicture();
-				
+				final Handler handler = new Handler();
+		        handler.postDelayed(new Runnable() {
+		            @Override
+		            public void run() {		         
+		            	Bitmap bmp = rotateImage(Preview.bitmap,90);
+						
+						float sx =(float) bmp.getWidth()/size.x;
+						float sy =(float) bmp.getHeight()/size.y;
+						x=(int)(x*sx);
+						y=(int)(y*sy);
+						int tch = bmp.getPixel(x, y);
+						txtColorName.setText(""+Integer.toHexString(tch));
+						txtColorName.setTextColor(tch);
+						
+		            }
+		        }, 500);
 				break;
-			/*case MotionEvent.ACTION_UP:
-				Log.d("aaaaaaaaa", Preview.bitmap.getWidth()+"/"+Preview.bitmap.getHeight());
-				Bitmap bmp = rotateImage(Preview.bitmap,90);
-
-				
-				float sx =(float) bmp.getWidth()/size.x;
-				float sy =(float) bmp.getHeight()/size.y;
-				x=(int)(x*sx);
-				y=(int)(y*sy);
-				int tch = bmp.getPixel(x, y);
-				txtColorName.setTextColor(tch);
-				break;
-			case MotionEvent.ACTION_MOVE:
-				txtColorName.setText("Toa do:" + x + "/" + y);
-				break;
-				*/
+			
 			}
 
 			return true;
 		}
 	};
 	
-	private Bitmap resizeImage(final Bitmap image) {
-		Bitmap resizedImage = null;		
-		resizedImage = Bitmap.createScaledBitmap(image, MainActivity.size.x,MainActivity.size.y, true);
-		return resizedImage;
-	}
+	/**
+	 Rotate Image bitmap
+	@param src: path of image bitmap; degree: rotate degree
+	@author duythanh
+	*/
 	
-	public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
-	    int width = bm.getWidth();
-	    int height = bm.getHeight();
-	    float scaleWidth = ((float) newWidth) / width;
-	    float scaleHeight = ((float) newHeight) / height;
-	    // CREATE A MATRIX FOR THE MANIPULATION
-	    Matrix matrix = new Matrix();
-	    // RESIZE THE BIT MAP
-	    matrix.postScale(scaleWidth, scaleHeight);
-
-	    // "RECREATE" THE NEW BITMAP
-	    Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-	    return resizedBitmap;
-	}
 	public Bitmap rotateImage(Bitmap src, float degree) {
 	     // create new matrix object
 	     Matrix matrix = new Matrix();
