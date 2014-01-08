@@ -34,13 +34,13 @@ public class RelateObjectDataSource {
 		Log.d("Add Object", obj.toString());
 		SQLiteDatabase db = databaseHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(DatabaseHelper.COLUMN_ID, obj.getRObjectId());
 		values.put(DatabaseHelper.COLUMN_NAME, obj.getRObjectName());
 		values.put(DatabaseHelper.COLUMN_COLOR_NAME, obj.getRObjectColor());
 		values.put(DatabaseHelper.COLUMN_IMG_NAME, obj.getRObjectImageName());
 		values.put(DatabaseHelper.COLUMN_SOUND_NAME, obj.getRObjectSoundPath());
 		
-		db.insert(DatabaseHelper.TABLE_RELATE_OBJECT, null, values);
+		long num = db.insert(DatabaseHelper.TABLE_RELATE_OBJECT, null, values);
+		Log.d("insert: ", String.valueOf(num));
 		db.close();
 	}
 	

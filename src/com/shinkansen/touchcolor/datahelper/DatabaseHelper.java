@@ -9,11 +9,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String DATABASE_NAME = "database1.db";
 	public static final String TABLE_RELATE_OBJECT = "RelateObject";
+	public static final String TABLE_COLOR = "Color";
 	public static final String COLUMN_ID = "id";
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_COLOR_NAME = "color_name";
 	public static final String COLUMN_IMG_NAME = "image_name";
 	public static final String COLUMN_SOUND_NAME = "sound_name";
+	
+	public static final String COLUMN_COLOR_HEX_CODE = "hex_code";
 	
 	private static final String DATABASE_CREATE = "create table "
 		      + TABLE_RELATE_OBJECT 
