@@ -1,6 +1,9 @@
 package com.shinkansen.touchcolor;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,7 +24,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,6 +33,7 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.shinkansen.touchcolor.DataModel.RelateObject;
 import com.shinkansen.touchcolor.adapter.ImageAdapter;
 import com.shinkansen.touchcolor.adapter.ImageViewPagerAdapter;
 import com.shinkansen.touchcolor.datahelper.RelateObjectDataSource;
@@ -47,12 +50,10 @@ public class MainActivity extends Activity {
 	private FrameLayout previewLayout;
 	
 	private RelateObjectDataSource relateObject;
-	Integer[] pics = {
-    		R.drawable.active1,
-    		R.drawable.active2,
-    		R.drawable.ic_launcher
-    };
-
+		ArrayList<Integer> pics = new ArrayList<Integer>();
+		
+		Integer[] picstest = {R.drawable.do3};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,9 +70,7 @@ public class MainActivity extends Activity {
 		mCamera = Camera.open();
 		mPreview.setCamera(mCamera);
 		previewLayout.addView(mPreview);
-		
 		ivTransparent.setOnTouchListener(ontch);
-		
 		
 		String colorString = dummydata();
 		
@@ -80,6 +79,29 @@ public class MainActivity extends Activity {
 		txtColorName.setTextColor(Color.parseColor(colorString));
 		
 		relateObject = new RelateObjectDataSource(this);
+		
+		RelateObject testObj = new RelateObject();
+		/*for (int i = 1; i < 4; i++){
+			testObj.setObjectImageName("do"+ i);
+			testObj.setRObjId(i+4);
+			testObj.setObjectColor("Do");
+			
+			relateObject.addRelateObject(testObj);
+		}*/
+
+		
+		List<RelateObject> listObject = relateObject.getObjectsByColor("Do");
+		
+		Log.d("num of object", String.valueOf(listObject.size()));
+		
+		if (!pics.isEmpty()) pics.clear();
+		
+		for (RelateObject relateObject : listObject) {
+			String imgName = relateObject.getRObjectImageName();
+			int indexImg = getResources().getIdentifier(imgName, "drawable", getPackageName());
+			Log.d("Index", String.valueOf(indexImg));	
+			pics.add(indexImg);
+		}
 				
 		Gallery gallery = (Gallery) findViewById(R.id.gallery);
 		gallery.setAdapter(new ImageAdapter(this, pics));
@@ -88,7 +110,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				showPopupImage(pics[arg2], arg2);
+				showPopupImage(pics.get(arg2), arg2);
 			}
         });
 	}

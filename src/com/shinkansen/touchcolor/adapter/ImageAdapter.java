@@ -1,6 +1,8 @@
 package com.shinkansen.touchcolor.adapter;
 
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,10 @@ import android.widget.ImageView;
  * @author huuthang
  */
 public class ImageAdapter extends BaseAdapter {
-	private Integer[] pics;
+	private ArrayList<Integer> pics;
 	private Context ctx;
 
-	public ImageAdapter(Context c, Integer[] pics) {
+	public ImageAdapter(Context c, ArrayList<Integer> pics) {
 		ctx = c;
 		this.pics = pics;
 	}
@@ -24,7 +26,7 @@ public class ImageAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		
-		return pics.length;
+		return pics.size();
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class ImageAdapter extends BaseAdapter {
 	@Override
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
 		ImageView iv = new ImageView(ctx);
-		iv.setImageResource(pics[arg0]);
+		iv.setImageResource(pics.get(arg0));
 		iv.setScaleType(ImageView.ScaleType.FIT_XY);
 		iv.setLayoutParams(new Gallery.LayoutParams(250,150));
 		return iv;
