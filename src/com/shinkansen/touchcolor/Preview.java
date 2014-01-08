@@ -117,7 +117,6 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
         	mCamera.setDisplayOrientation(0);
             mSupportedPreviewSizes = mCamera.getParameters().getSupportedPreviewSizes();
             requestLayout();
-            mCamera.startPreview();
         }
     }
     
