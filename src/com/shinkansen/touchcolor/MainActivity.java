@@ -51,8 +51,10 @@ public class MainActivity extends Activity {
 	private ImageView ivShowColor;
 	private ImageView ivTransparent;
 	private FrameLayout previewLayout;
+
 	private String colorCatchedName;
 	private Gallery gallery;
+
 	
 	private RelateObjectDataSource relateObject;
 		ArrayList<Integer> pics = new ArrayList<Integer>();
@@ -160,7 +162,7 @@ public class MainActivity extends Activity {
 		            public void run() {		         
 		            	//Bitmap bmp = rotateImage(Preview.bitmap,90);
 						Bitmap bmp = Preview.bitmap;
-						Log.d("sss",bmp.getWidth()+"/"+bmp.getHeight());
+
 						float sx =(float) bmp.getWidth()/size.x;
 						float sy =(float) bmp.getHeight()/size.y;
 						x=(int)(x*sx);
@@ -172,6 +174,7 @@ public class MainActivity extends Activity {
 						//Log.d("color after parse", String.valueOf(tch));
 						colorCatchedName = getBestMatchingColorName(tch);
 						txtColorName.setText(colorCatchedName);
+
 						txtColorName.setTextColor(tch);
 						
 						// show ralate object
@@ -210,6 +213,7 @@ public class MainActivity extends Activity {
 	/**
 	Get name Color of pixel
 	@param color: color of pixel(int)
+<<<<<<< HEAD
 	@author 2A-duythanh
 	*/
 
@@ -297,6 +301,18 @@ public class MainActivity extends Activity {
 	    return closestColorName+currentDifference;
 //	    else return "Khong mau";
 	}
+	/**
+	@author duythanh
+	*/
+	public String getNameColor(int color){
+		if(Color.parseColor("#3e4095")<=color&&Color.parseColor("#3e4095")+1000>=color);
+		
+		return "";
+	}
+	
+	
+	
+
 	/**
 	 Rotate Image bitmap
 	@param src: path of image bitmap; degree: rotate degree
