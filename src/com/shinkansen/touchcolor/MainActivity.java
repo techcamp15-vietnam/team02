@@ -39,7 +39,9 @@ import android.widget.TextView;
 import com.shinkansen.touchcolor.DataModel.RelateObject;
 import com.shinkansen.touchcolor.adapter.ImageAdapter;
 import com.shinkansen.touchcolor.adapter.ImageViewPagerAdapter;
+import com.shinkansen.touchcolor.constant.Constant;
 import com.shinkansen.touchcolor.datahelper.RelateObjectDataSource;
+import com.shinkansen.touchcolor.soundmanager.SoundManager;
 
 public class MainActivity extends Activity {
 	
@@ -76,6 +78,10 @@ public class MainActivity extends Activity {
 		mCamera = Camera.open();
 		mPreview.setCamera(mCamera);
 		previewLayout.addView(mPreview);
+		
+		//int sound manager
+		SoundManager.getInstance().initSound(this);
+		
 		ivTransparent.setOnTouchListener(ontch);
 		
 		String colorString = dummydata();
@@ -87,7 +93,7 @@ public class MainActivity extends Activity {
 		
 		relateObject = new RelateObjectDataSource(this);
 		
-		RelateObject testObj = new RelateObject();
+		/*RelateObject testObj = new RelateObject();
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("do"+ i);
 			testObj.setObjectColor("red");
@@ -130,7 +136,7 @@ public class MainActivity extends Activity {
 			testObj.setObjectColor("orange");
 			
 			relateObject.addRelateObject(testObj);
-		}
+		}*/
 	}
 	
 	@Override
@@ -386,9 +392,16 @@ public class MainActivity extends Activity {
 		case R.id.btnMenu:
 			
 			break;
-		case R.id.btnNextColor:
-			
+		case R.id.btnPlaySound:{
+			for (int i = 0; i < Constant.COLOR.length; i++) {
+				Log.d("Compare", Constant.COLOR[i] + "//" + colorCatchedName);
+				if (Constant.COLOR[i].equals(colorCatchedName)){
+					SoundManager.getInstance().playSound(i+1);
+					break;
+				}
+			}
 			break;
+		}
 		case R.id.btnPlay:{
 			if (mCamera != null) {
 				mPreview.setCamera(null);
