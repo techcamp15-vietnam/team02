@@ -8,7 +8,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
-import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
 import android.hardware.Camera.Size;
@@ -51,16 +50,20 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
-		Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
-        requestLayout();
+		Log.d("Preview", "call surface changed");
+		if (mCamera != null){
+			Camera.Parameters parameters = mCamera.getParameters();
+	        parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+	        requestLayout();
 
-        mCamera.setParameters(parameters);
-        mCamera.startPreview();
+	        mCamera.setParameters(parameters);
+	        mCamera.startPreview();
+		}
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
+		Log.d("Preview", "call surface create camera");
 		try {
             if (mCamera != null) {
                 mCamera.setPreviewDisplay(holder);
@@ -72,6 +75,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
+		Log.d("Preview", "call destroy camera");
 		if (mCamera != null) {
             mCamera.stopPreview();
         }
