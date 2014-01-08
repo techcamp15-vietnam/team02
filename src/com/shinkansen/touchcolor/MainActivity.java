@@ -93,7 +93,8 @@ public class MainActivity extends Activity {
 			testObj.setObjectColor("red");
 			
 			relateObject.addRelateObject(testObj);
-		}/*
+		}
+		
 		for (int i = 1; i < 3; i++){
 			testObj.setObjectImageName("trang"+ i);
 			testObj.setObjectColor("white");
@@ -129,11 +130,32 @@ public class MainActivity extends Activity {
 			testObj.setObjectColor("orange");
 			
 			relateObject.addRelateObject(testObj);
-		}*/
-		
-		
+		}
 	}
 	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		// Because the Camera object is a shared resource, it's very
+		// important to release it when the activity is paused.
+		if (mCamera != null) {
+			mPreview.setCamera(null);
+			mCamera.release();
+			mCamera = null;
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// Open the default i.e. the first rear facing camera.
+		if(mCamera == null){
+			mCamera = Camera.open();
+			mPreview.setCamera(mCamera);
+
+		}
+		
+	}
 	/**
 	 On touch screen, get color of the position
 	@param:
@@ -202,7 +224,7 @@ public class MainActivity extends Activity {
 							}
 				        });
 		            }
-		        }, 2000);
+		        }, 500);
 				break;
 			
 			}
@@ -298,7 +320,7 @@ public class MainActivity extends Activity {
 	        }
 	    }
 //	    if(currentDifference<50)
-	    return closestColorName+currentDifference;
+	    return closestColorName;
 //	    else return "Khong mau";
 	}
 	/**
@@ -334,25 +356,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	@Override
-	protected void onPause() {
-		super.onPause();
-		// Because the Camera object is a shared resource, it's very
-		// important to release it when the activity is paused.
-		if (mCamera != null) {
-			mPreview.setCamera(null);
-			mCamera.release();
-			mCamera = null;
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		// Open the default i.e. the first rear facing camera.
-		
-
-	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch(item.getItemId()){

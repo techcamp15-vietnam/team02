@@ -173,7 +173,7 @@ public class PlayActivity extends Activity {
 					
 						
 		            }
-		        }, 2000);
+		        }, 500);
 				break;
 			
 			}
