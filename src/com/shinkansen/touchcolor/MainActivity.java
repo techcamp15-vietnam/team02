@@ -14,14 +14,12 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,6 +32,7 @@ import android.widget.TextView;
 import com.shinkansen.touchcolor.adapter.ImageAdapter;
 import com.shinkansen.touchcolor.adapter.ImageViewPagerAdapter;
 import com.shinkansen.touchcolor.datahelper.RelateObjectDataSource;
+import com.shinkansen.touchcolor.soundmanager.SoundManager;
 
 public class MainActivity extends Activity {
 	
@@ -45,6 +44,7 @@ public class MainActivity extends Activity {
 	private ImageView ivShowColor;
 	private ImageView ivTransparent;
 	private FrameLayout previewLayout;
+	private SoundManager mSoundManager;
 	
 	private RelateObjectDataSource relateObject;
 	Integer[] pics = {
