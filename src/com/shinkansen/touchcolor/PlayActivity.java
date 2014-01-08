@@ -37,6 +37,7 @@ public class PlayActivity extends Activity {
 	private ImageView ivTransparent;
 	private FrameLayout previewLayout;
 	private String colorCatchedName;
+	private String colorCurrentName;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,9 @@ public class PlayActivity extends Activity {
 		
 		ivTransparent.setOnTouchListener(ontch);
 		int randIndex = randomColorIndex();
-		String colorString = Constant.COLOR[randIndex];
+		colorCurrentName = Constant.COLOR[randIndex];
 		ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
-		txtColorName.setText(colorString);
+		txtColorName.setText(colorCurrentName);
 		txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
 		
 	}
@@ -160,16 +161,32 @@ public class PlayActivity extends Activity {
 		            @Override
 		            public void run() {		         
 						Bitmap bmp = Preview.bitmap;
-						Log.d("sss",bmp.getWidth()+"/"+bmp.getHeight());
+						Log.d("sss",bmp.getWidth()+"/"+bmp.getHeight()+"    "+x+"/"+y);
 						float sx =(float) bmp.getWidth()/size.x;
 						float sy =(float) bmp.getHeight()/size.y;
 						x=(int)(x*sx);
 						y=(int)(y*sy);
+						Log.d("sss",x+"/"+y);					
 						int tch = bmp.getPixel(x, y);
 						ivShowColor.setBackgroundColor(tch);
 						colorCatchedName = getBestMatchingColorName(tch);
-						txtColorName.setText(colorCatchedName);
-						txtColorName.setTextColor(tch);
+						TextView tempView = (TextView)findViewById(R.id.textView1);
+						tempView.setText(colorCatchedName);
+						tempView.setTextColor(tch);
+									
+							if(colorCatchedName == colorCurrentName)
+							{
+								Log.d("aaaaaaaaaaa","dung mau");
+								int randIndex = randomColorIndex();
+								colorCurrentName = Constant.COLOR[randIndex];
+								ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
+								txtColorName.setText(colorCurrentName);
+								txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
+								
+							}
+							else
+								Log.d("aaaaaaaaaaa","sai mau");
+						
 					
 						
 		            }
@@ -184,19 +201,59 @@ public class PlayActivity extends Activity {
 	/**
 	Get name Color of pixel
 	@param color: color of pixel(int)
+<<<<<<< HEAD
 	@author 2A-duythanh
 	*/
 
 	private String getBestMatchingColorName(int pixelColor) {
 		Map<String, Integer> mColors = new HashMap<String, Integer>();
 		mColors.put("blue", Color.rgb(0, 0, 255));
+		mColors.put("blue", Color.rgb(0, 0, 238));
+		mColors.put("blue", Color.rgb(0, 0, 205));
+		mColors.put("blue", Color.rgb(0, 0, 139));
+//		mColors.put("cyan", Color.rgb(0, 255, 255));
 		mColors.put("green", Color.rgb(0, 255, 0));
+		mColors.put("green", Color.rgb(0, 238, 0));
+		mColors.put("green", Color.rgb(0, 205, 0));
+		
 		mColors.put("yellow", Color.rgb(255, 255, 0));
-		mColors.put("red", Color.rgb(255, 0, 0));
-		mColors.put("purple", Color.rgb(160, 32, 240));
-		mColors.put("orange", Color.rgb(255, 165, 0));
-		mColors.put("black", Color.rgb(0, 0, 0));
+		mColors.put("yellow", Color.rgb(238, 238, 0));
+		mColors.put("yellow", Color.rgb(238, 220, 130));
+		mColors.put("yellow", Color.rgb(238, 201, 0));
+		mColors.put("yellow", Color.rgb(255, 236, 139));
+		mColors.put("yellow", Color.rgb(205, 205, 0));
+		
+		mColors.put("red", Color.rgb(206, 14, 12));
+		mColors.put("red", Color.rgb(238, 22, 2));
+		mColors.put("red", Color.rgb(255, 4, 4));
+		mColors.put("red", Color.rgb(139, 11, 11));
+		
+		mColors.put("orange", Color.rgb(255, 153, 18));
+		mColors.put("orange", Color.rgb(237, 145, 33));
+		mColors.put("orange", Color.rgb(255, 140, 0));
+		mColors.put("orange", Color.rgb(255, 127, 0));
+		mColors.put("orange", Color.rgb(255, 102, 0));
+		mColors.put("orange", Color.rgb(255, 128, 0));
+		
+		
+		
+		mColors.put("purple", Color.rgb(148, 0, 211));
+		mColors.put("purple", Color.rgb(153, 50, 204));
+		mColors.put("purple", Color.rgb(138, 43, 226));
+		mColors.put("purple", Color.rgb(155, 48, 255));
+		mColors.put("purple", Color.rgb(145, 44, 238));
+		
 		mColors.put("white", Color.rgb(255, 255, 255));
+//		mColors.put("pink", Color.rgb(255, 192, 203));
+		mColors.put("pink", Color.rgb(238, 121, 159));
+		mColors.put("pink", Color.rgb(205, 104, 137));
+		mColors.put("pink", Color.rgb(238, 162, 173));
+		mColors.put("pink", Color.rgb(238, 18, 137));
+		mColors.put("pink", Color.rgb(238, 48, 167));
+		mColors.put("pink", Color.rgb(255, 20, 147));
+		
+
+		mColors.put("black", Color.rgb(0, 0, 0));
 		
 		
 	    // largest difference is 255 for every colour component
