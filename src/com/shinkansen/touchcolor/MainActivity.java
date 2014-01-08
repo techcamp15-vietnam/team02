@@ -120,13 +120,16 @@ public class MainActivity extends Activity {
 		            public void run() {		         
 		            	//Bitmap bmp = rotateImage(Preview.bitmap,90);
 						Bitmap bmp = Preview.bitmap;
-						Log.d("sssssssssssssssssssssssssssssssssssssssssss",bmp.getWidth()+"/"+bmp.getHeight());
 						float sx =(float) bmp.getWidth()/size.x;
 						float sy =(float) bmp.getHeight()/size.y;
 						x=(int)(x*sx);
 						y=(int)(y*sy);
 						int tch = bmp.getPixel(x, y);
-						txtColorName.setText(""+Integer.toHexString(tch));
+						String strColor = String.format("#%06X", 0xFFFFFF & tch);
+//						txtColorName.setText(""+Integer.toHexString(str));
+						//tch = Color.parseColor("#000000");
+						tch +=1000;
+						txtColorName.setText(""+tch);
 						txtColorName.setTextColor(tch);
 						
 		            }
@@ -138,6 +141,18 @@ public class MainActivity extends Activity {
 			return true;
 		}
 	};
+	/**
+	Get name Color of pixel
+	@param color: color of pixel(int)
+	@author duythanh
+	*/
+	public String getNameColor(int color){
+		if(Color.parseColor("#3e4095")<=color&&Color.parseColor("#3e4095")+1000>=color);
+		
+		return "";
+	}
+	
+	
 	
 	/**
 	 Rotate Image bitmap
