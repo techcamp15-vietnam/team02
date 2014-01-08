@@ -118,8 +118,9 @@ public class MainActivity extends Activity {
 		        handler.postDelayed(new Runnable() {
 		            @Override
 		            public void run() {		         
-		            	Bitmap bmp = rotateImage(Preview.bitmap,90);
-						
+		            	//Bitmap bmp = rotateImage(Preview.bitmap,90);
+						Bitmap bmp = Preview.bitmap;
+						Log.d("sssssssssssssssssssssssssssssssssssssssssss",bmp.getWidth()+"/"+bmp.getHeight());
 						float sx =(float) bmp.getWidth()/size.x;
 						float sy =(float) bmp.getHeight()/size.y;
 						x=(int)(x*sx);
