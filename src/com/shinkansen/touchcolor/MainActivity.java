@@ -7,10 +7,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.w3c.dom.ls.LSInput;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -54,12 +57,12 @@ public class MainActivity extends Activity {
 	private ImageView ivTransparent;
 	private FrameLayout previewLayout;
 
-	private String colorCatchedName;
+	private String colorCatchedName = "red";
 	private Gallery gallery;
 
 	
 	private RelateObjectDataSource relateObject;
-		ArrayList<Integer> pics = new ArrayList<Integer>();
+	ArrayList<Integer> pics = new ArrayList<Integer>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,64 +87,50 @@ public class MainActivity extends Activity {
 		
 		ivTransparent.setOnTouchListener(ontch);
 		
-		String colorString = dummydata();
+		// get color's used last time
+		SharedPreferences sharedPref = getSharedPreferences("local_data", MODE_PRIVATE);
+		int colorId = sharedPref.getInt("last_color_id", Constant.COLOR_ID[0]);
+		String colorString = sharedPref.getString("last_color_name", "red");
+		colorCatchedName = colorString;
 		
-		ivShowColor.setBackgroundColor(Color.parseColor(colorString));
+		ivShowColor.setBackgroundColor(colorId);
 		txtColorName.setText(colorString);
-		txtColorName.setTextColor(Color.parseColor(colorString));
+		txtColorName.setTextColor(colorId);
 		
 		
 		relateObject = new RelateObjectDataSource(this);
 		
-		/*RelateObject testObj = new RelateObject();
-		for (int i = 1; i < 5; i++){
-			testObj.setObjectImageName("do"+ i);
-			testObj.setObjectColor("red");
-			
-			relateObject.addRelateObject(testObj);
+		List<RelateObject> listObject = relateObject.getObjectsByColor("red");
+		if (listObject.size() == 0){
+			RelateObjectDataSource.addSampleData(relateObject);
 		}
+		// show ralate object
+		listObject = relateObject.getObjectsByColor(colorString);
 		
-		for (int i = 1; i < 3; i++){
-			testObj.setObjectImageName("trang"+ i);
-			testObj.setObjectColor("white");
-			
-			relateObject.addRelateObject(testObj);
+		if (!pics.isEmpty()) pics.clear();
+		
+		for (RelateObject relateObject : listObject) {
+			String imgName = relateObject.getRObjectImageName();
+			int indexImg = getResources().getIdentifier(imgName, "drawable", getPackageName());
+			pics.add(indexImg);
 		}
-		for (int i = 1; i < 5; i++){
-			testObj.setObjectImageName("vang"+ i);
-			testObj.setObjectColor("yellow");
-			
-			relateObject.addRelateObject(testObj);
-		}
-		for (int i = 1; i < 5; i++){
-			testObj.setObjectImageName("xanh"+ i);
-			testObj.setObjectColor("green");
-			
-			relateObject.addRelateObject(testObj);
-		}
-		for (int i = 1; i < 5; i++){
-			testObj.setObjectImageName("tim"+ i);
-			testObj.setObjectColor("purple");
-			
-			relateObject.addRelateObject(testObj);
-		}
-		for (int i = 1; i < 5; i++){
-			testObj.setObjectImageName("den"+ i);
-			testObj.setObjectColor("black");
-			
-			relateObject.addRelateObject(testObj);
-		}
-		for (int i = 1; i < 3; i++){
-			testObj.setObjectImageName("cam"+ i);
-			testObj.setObjectColor("orange");
-			
-			relateObject.addRelateObject(testObj);
-		}*/
+				
+		gallery.setAdapter(new ImageAdapter(getApplicationContext(), pics));
+		gallery.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				showPopupImage(pics.get(arg2), arg2);
+			}
+        });
+		
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
+		Log.d("MainActivity", "call onPause");
 		// Because the Camera object is a shared resource, it's very
 		// important to release it when the activity is paused.
 		if (mCamera != null) {
@@ -154,6 +143,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.d("MainActivity", "call onResume");
 		// Open the default i.e. the first rear facing camera.
 		if(mCamera == null){
 			mCamera = Camera.open();
@@ -162,6 +152,24 @@ public class MainActivity extends Activity {
 		}
 		
 	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
+		for (int i = 0; i < Constant.COLOR.length; i++) {
+			if (Constant.COLOR[i].equals(this.colorCatchedName)){
+				SharedPreferences sharedPref = getSharedPreferences("local_data", MODE_PRIVATE);
+		    	SharedPreferences.Editor editor = sharedPref.edit();
+		    	editor.putInt("last_color_id", Constant.COLOR_ID[i]);
+		    	editor.putString("last_color_name", Constant.COLOR[i]);
+		    	editor.commit();
+		    	break;
+			}
+		}
+
+	}
+
 	/**
 	 On touch screen, get color of the position
 	@param:
@@ -193,13 +201,10 @@ public class MainActivity extends Activity {
 
 						float sx =(float) bmp.getWidth()/size.x;
 						float sy =(float) bmp.getHeight()/size.y;
-						x=(int)(x*sx);
+						/*x=(int)(x*sx);
 						y=(int)(y*sy);
 						int tch = bmp.getPixel(x, y);
 						ivShowColor.setBackgroundColor(tch);
-						Log.d("color before parse", String.valueOf(tch));
-						//tch = caculateColorNearest(tch);
-						//Log.d("color after parse", String.valueOf(tch));
 						colorCatchedName = getBestMatchingColorName(tch);
 						txtColorName.setText(colorCatchedName);
 
@@ -216,7 +221,6 @@ public class MainActivity extends Activity {
 						for (RelateObject relateObject : listObject) {
 							String imgName = relateObject.getRObjectImageName();
 							int indexImg = getResources().getIdentifier(imgName, "drawable", getPackageName());
-							//Log.d("Index", String.valueOf(indexImg));	
 							pics.add(indexImg);
 						}
 								
@@ -229,8 +233,10 @@ public class MainActivity extends Activity {
 								showPopupImage(pics.get(arg2), arg2);
 							}
 				        });
+				        */
 		            }
 		        }, 500);
+		        
 				break;
 			
 			}
@@ -375,13 +381,7 @@ public class MainActivity extends Activity {
 		}
 		return false;
 	}
-	
-	public String dummydata(){
-		String[] color = {"Red", "Blue", "Green", "White", "Black"};
-		int rand = (int)( Math.random() * 5);
-		return color[rand];
-	}
-	
+
 	/**
 	 Event when button click
 	@param view : view of button 
