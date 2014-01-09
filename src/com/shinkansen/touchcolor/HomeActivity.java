@@ -69,11 +69,13 @@ public class HomeActivity extends Activity {
 	public void buttonClick(View view) {
 		switch (view.getId()) {
 		case R.id.btnStudyColor: {
+			SoundManager.getInstance().playSound(13);
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			break;
 		}
 		case R.id.btnRememberColor: {
+			SoundManager.getInstance().playSound(14);
 			Intent intent = new Intent(this, PlayActivity.class);
 			startActivity(intent);
 			break;
