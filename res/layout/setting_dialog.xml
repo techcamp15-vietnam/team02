@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <CheckBox
+        android:id="@+id/chkSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="198dp"
+        android:layout_marginTop="78dp"
+        android:text="Sound" />
+
+    <Button
+        android:id="@+id/s_btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/chkSound"
+        android:layout_below="@+id/chkSound"
+        android:layout_marginTop="40dp"
+        android:text="Ok" />
+
+</RelativeLayout>
