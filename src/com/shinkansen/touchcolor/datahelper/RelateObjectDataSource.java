@@ -79,44 +79,56 @@ public class RelateObjectDataSource {
 		RelateObject testObj = new RelateObject();
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("do"+ i);
-			testObj.setObjectColor("red");
+			testObj.setObjectColor("あかい");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		
 		for (int i = 1; i < 3; i++){
 			testObj.setObjectImageName("trang"+ i);
-			testObj.setObjectColor("white");
+			testObj.setObjectColor("しろい");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("vang"+ i);
-			testObj.setObjectColor("yellow");
+			testObj.setObjectColor("きいろ");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("xanh"+ i);
-			testObj.setObjectColor("green");
+			testObj.setObjectColor("みどり");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("tim"+ i);
-			testObj.setObjectColor("purple");
+			testObj.setObjectColor("パープル");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("den"+ i);
-			testObj.setObjectColor("black");
+			testObj.setObjectColor("くろい");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		for (int i = 1; i < 5; i++){
+			testObj.setObjectImageName("hong"+ i);
+			testObj.setObjectColor("ピンク");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 3; i++){
 			testObj.setObjectImageName("cam"+ i);
-			testObj.setObjectColor("orange");
+			testObj.setObjectColor("オレンジ");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		for (int i = 1; i < 5; i++){
+			testObj.setObjectImageName("luc"+ i);
+			testObj.setObjectColor("あおい");
 			
 			relateObject.addRelateObject(testObj);
 		}

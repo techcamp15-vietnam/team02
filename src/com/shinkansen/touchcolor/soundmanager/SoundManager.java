@@ -27,17 +27,21 @@ public class SoundManager {
     public SoundManager() {
        
     }
-    public void initSound(Context ct) {
+    public void initSoundBackground(Context ct) {
     	mContext = ct;
     	mSoundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         mSoundPoolMap = new HashMap<Integer, Integer>();
         mAudioManager = (AudioManager) mContext
                 .getSystemService(Context.AUDIO_SERVICE);
-        for (int i = 0; i < Constant.SOUND_ID.length; i++) {
+        addSound(1, Constant.SOUND_ID[0]);
+	}
+    public void initSound(Context ct) {
+    	
+        for (int i = 1; i < Constant.SOUND_ID.length; i++) {
 			addSound(i+1, Constant.SOUND_ID[i]);
 		}
     }
- 
+   
     public void addSound(int index, int soundID) {
         mSoundPoolMap.put(index, mSoundPool.load(mContext, soundID, 1));
     }

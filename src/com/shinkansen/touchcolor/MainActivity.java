@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		SoundManager.getInstance().initSound(this);
 		ivTransparent = (ImageView) findViewById(R.id.ivTransparent);
 		
 		previewLayout = (FrameLayout) findViewById(R.id.preview);
@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
 		// get color's used last time
 		SharedPreferences sharedPref = getSharedPreferences("local_data", MODE_PRIVATE);
 		int colorId = sharedPref.getInt("last_color_id", Constant.COLOR_ID[0]);
-		String colorString = sharedPref.getString("last_color_name", "red");
+		String colorString = sharedPref.getString("last_color_name", "あかい");
 		colorCatchedName = colorString;
 		
 		ivShowColor.setBackgroundColor(colorId);
@@ -100,7 +100,8 @@ public class MainActivity extends Activity {
 		
 		relateObject = new RelateObjectDataSource(this);
 		
-		List<RelateObject> listObject = relateObject.getObjectsByColor("red");
+		List<RelateObject> listObject = relateObject.getObjectsByColor("あかい");
+		//RelateObjectDataSource.addSampleData(relateObject);
 		if (listObject.size() == 0){
 			RelateObjectDataSource.addSampleData(relateObject);
 		}

@@ -1,26 +1,41 @@
 package com.shinkansen.touchcolor;
 
-import com.shinkansen.touchcolor.soundmanager.SoundManager;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.shinkansen.touchcolor.soundmanager.SoundManager;
+
 public class HomeActivity extends Activity {
+	private AnimationDrawable animation1;
+	private ImageView imgAni1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+
 		SoundManager.getInstance().initSoundBackground(this);
+
+		SoundManager.getInstance().initSound(this);
+		imgAni1 = (ImageView) findViewById(R.id.animation1);
+		animation1 = (AnimationDrawable) imgAni1.getDrawable();
+		 
+        animation1.setCallback(imgAni1);
+
+        animation1.setVisible(true, true);
+        animation1.start();
+
 	}
 
 	@Override
