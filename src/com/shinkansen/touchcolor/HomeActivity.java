@@ -25,9 +25,6 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 
-		SoundManager.getInstance().initSoundBackground(this);
-
-		SoundManager.getInstance().initSound(this);
 		imgAni1 = (ImageView) findViewById(R.id.animation1);
 		animation1 = (AnimationDrawable) imgAni1.getDrawable();
 		 
