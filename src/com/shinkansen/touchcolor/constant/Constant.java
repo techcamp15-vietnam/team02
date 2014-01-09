@@ -13,7 +13,7 @@ Class define constant are used in App
 
 public class Constant {
 	public static final String[] COLOR =
-		{"red","blue","green","yellow","orange","purple","pink","white","black"};
+		{"あかい","あおい","みどり","きいろ","オレンジ","パープル","ピンク","しろい","くろい"};
 	public static final Integer[] COLOR_ID = {
 		Color.parseColor("#FF0000"),
 		Color.parseColor("#0000FF"),
