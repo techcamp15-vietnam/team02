@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="84dp"
-        android:text="Turn off Sound" />
+        android:text="音の変わり目" />
 
     <Button
         android:id="@+id/s_btnOk"
