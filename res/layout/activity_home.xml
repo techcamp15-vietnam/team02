@@ -34,8 +34,8 @@
 
     <Button
         android:id="@+id/btnRememberColor"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/btnHelp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/remember"
@@ -43,12 +43,21 @@
 
     <Button
         android:id="@+id/btnStudyColor"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/btnRememberColor"
         android:layout_alignLeft="@+id/btnRememberColor"
         android:background="@drawable/study"
         android:onClick="buttonClick" 
         android:layout_marginBottom="10dp"/>
+
+    <ImageView
+        android:id="@+id/animation1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/btnStudyColor"
+        android:src="@drawable/animation1" />
 
 </RelativeLayout>
