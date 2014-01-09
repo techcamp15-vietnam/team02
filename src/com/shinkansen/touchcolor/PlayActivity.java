@@ -305,88 +305,87 @@ public class PlayActivity extends Activity {
 
 	private String getBestMatchingColorName(int pixelColor) {
 		Map<String, Integer> mColors = new HashMap<String, Integer>();
-		mColors.put("blue", Color.rgb(0, 0, 255));
-		mColors.put("blue", Color.rgb(0, 0, 238));
-		mColors.put("blue", Color.rgb(0, 0, 205));
-		mColors.put("blue", Color.rgb(0, 0, 139));
-		// mColors.put("cyan", Color.rgb(0, 255, 255));
-		mColors.put("green", Color.rgb(0, 255, 0));
-		mColors.put("green", Color.rgb(0, 238, 0));
-		mColors.put("green", Color.rgb(0, 205, 0));
+		mColors.put("あおい", Color.rgb(0, 0, 255));
+		mColors.put("あおい", Color.rgb(0, 0, 238));
+		mColors.put("あおい", Color.rgb(0, 0, 205));
+		mColors.put("あおい", Color.rgb(0, 0, 139));
+//		mColors.put("cyan", Color.rgb(0, 255, 255));
+		mColors.put("みどり", Color.rgb(0, 255, 0));
+		mColors.put("みどり", Color.rgb(0, 238, 0));
+		mColors.put("みどり", Color.rgb(0, 205, 0));
+		
+		mColors.put("きいろ", Color.rgb(255, 255, 0));
+		mColors.put("きいろ", Color.rgb(238, 238, 0));
+		mColors.put("きいろ", Color.rgb(238, 220, 130));
+		mColors.put("きいろ", Color.rgb(238, 201, 0));
+		mColors.put("きいろ", Color.rgb(255, 236, 139));
+		mColors.put("きいろ", Color.rgb(205, 205, 0));
+		
+		mColors.put("あかい", Color.rgb(206, 14, 12));
+		mColors.put("あかい", Color.rgb(238, 22, 2));
+		mColors.put("あかい", Color.rgb(255, 4, 4));
+		mColors.put("あかい", Color.rgb(139, 11, 11));
+		
+		mColors.put("オレンジ", Color.rgb(255, 153, 18));
+		mColors.put("オレンジ", Color.rgb(237, 145, 33));
+		mColors.put("オレンジ", Color.rgb(255, 140, 0));
+		mColors.put("オレンジ", Color.rgb(255, 127, 0));
+		mColors.put("オレンジ", Color.rgb(255, 102, 0));
+		mColors.put("オレンジ", Color.rgb(255, 128, 0));
+		
+		
+		
+		mColors.put("パープル", Color.rgb(148, 0, 211));
+		mColors.put("パープル", Color.rgb(153, 50, 204));
+		mColors.put("パープル", Color.rgb(138, 43, 226));
+		mColors.put("パープル", Color.rgb(155, 48, 255));
+		mColors.put("パープル", Color.rgb(145, 44, 238));
+		
+		mColors.put("しろい", Color.rgb(255, 255, 255));
+//		mColors.put("pink", Color.rgb(255, 192, 203));
+		mColors.put("ピンク", Color.rgb(238, 121, 159));
+		mColors.put("ピンク", Color.rgb(205, 104, 137));
+		mColors.put("ピンク", Color.rgb(238, 162, 173));
+		mColors.put("ピンク", Color.rgb(238, 18, 137));
+		mColors.put("ピンク", Color.rgb(238, 48, 167));
+		mColors.put("ピンク", Color.rgb(255, 20, 147));
+		
 
-		mColors.put("yellow", Color.rgb(255, 255, 0));
-		mColors.put("yellow", Color.rgb(238, 238, 0));
-		mColors.put("yellow", Color.rgb(238, 220, 130));
-		mColors.put("yellow", Color.rgb(238, 201, 0));
-		mColors.put("yellow", Color.rgb(255, 236, 139));
-		mColors.put("yellow", Color.rgb(205, 205, 0));
+		mColors.put("くろい", Color.rgb(0, 0, 0));
+		
+		
+	    // largest difference is 255 for every colour component
+	    int currentDifference = 3 * 255;
+	    // name of the best matching colour
+	    String closestColorName = null;
+	    // get int values for all three colour components of the pixel
+	    int pixelColorR = Color.red(pixelColor);
+	    int pixelColorG = Color.green(pixelColor);
+	    int pixelColorB = Color.blue(pixelColor);
 
-		mColors.put("red", Color.rgb(206, 14, 12));
-		mColors.put("red", Color.rgb(238, 22, 2));
-		mColors.put("red", Color.rgb(255, 4, 4));
-		mColors.put("red", Color.rgb(139, 11, 11));
-
-		mColors.put("orange", Color.rgb(255, 153, 18));
-		mColors.put("orange", Color.rgb(237, 145, 33));
-		mColors.put("orange", Color.rgb(255, 140, 0));
-		mColors.put("orange", Color.rgb(255, 127, 0));
-		mColors.put("orange", Color.rgb(255, 102, 0));
-		mColors.put("orange", Color.rgb(255, 128, 0));
-
-		mColors.put("purple", Color.rgb(148, 0, 211));
-		mColors.put("purple", Color.rgb(153, 50, 204));
-		mColors.put("purple", Color.rgb(138, 43, 226));
-		mColors.put("purple", Color.rgb(155, 48, 255));
-		mColors.put("purple", Color.rgb(145, 44, 238));
-
-		mColors.put("white", Color.rgb(255, 255, 255));
-		// mColors.put("pink", Color.rgb(255, 192, 203));
-		mColors.put("pink", Color.rgb(238, 121, 159));
-		mColors.put("pink", Color.rgb(205, 104, 137));
-		mColors.put("pink", Color.rgb(238, 162, 173));
-		mColors.put("pink", Color.rgb(238, 18, 137));
-		mColors.put("pink", Color.rgb(238, 48, 167));
-		mColors.put("pink", Color.rgb(255, 20, 147));
-
-		mColors.put("black", Color.rgb(0, 0, 0));
-
-		// largest difference is 255 for every colour component
-		int currentDifference = 3 * 255;
-		// name of the best matching colour
-		String closestColorName = null;
-		// get int values for all three colour components of the pixel
-		int pixelColorR = Color.red(pixelColor);
-		int pixelColorG = Color.green(pixelColor);
-		int pixelColorB = Color.blue(pixelColor);
-
-		Iterator<String> colorNameIterator = mColors.keySet().iterator();
-		// continue iterating if the map contains a next colour and the
-		// difference is greater than zero.
-		// a difference of zero means we've found an exact match, so there's no
-		// point in iterating further.
-		while (colorNameIterator.hasNext() && currentDifference > 0) {
-			// this colour's name
-			String currentColorName = colorNameIterator.next();
-			// this colour's int value
-			int color = mColors.get(currentColorName);
-			// get int values for all three colour components of this colour
-			int colorR = Color.red(color);
-			int colorG = Color.green(color);
-			int colorB = Color.blue(color);
-			// calculate sum of absolute differences that indicates how good
-			// this match is
-			int difference = Math.abs(pixelColorR - colorR)
-					+ Math.abs(pixelColorG - colorG)
-					+ Math.abs(pixelColorB - colorB);
-			// a smaller difference means a better match, so keep track of it
-			if (currentDifference > difference) {
-				currentDifference = difference;
-				closestColorName = currentColorName;
-			}
-		}
-		// if(currentDifference<50)
-		return closestColorName;
-		// else return "Khong mau";
+	    Iterator<String> colorNameIterator = mColors.keySet().iterator();
+	    // continue iterating if the map contains a next colour and the difference is greater than zero.
+	    // a difference of zero means we've found an exact match, so there's no point in iterating further.
+	    while (colorNameIterator.hasNext() && currentDifference > 0) {
+	        // this colour's name
+	        String currentColorName = colorNameIterator.next();
+	        // this colour's int value
+	        int color = mColors.get(currentColorName);
+	        // get int values for all three colour components of this colour
+	        int colorR = Color.red(color);
+	        int colorG = Color.green(color);
+	        int colorB = Color.blue(color); 
+	        // calculate sum of absolute differences that indicates how good this match is 
+	        int difference = Math.abs(pixelColorR - colorR) + Math.abs(pixelColorG - colorG) + Math.abs(pixelColorB - colorB);
+	        // a smaller difference means a better match, so keep track of it
+	        if (currentDifference > difference) {
+	            currentDifference = difference;
+	            closestColorName = currentColorName;
+	        }
+	    }
+//	    if(currentDifference<50)
+	    return closestColorName;
+//	    else return "Khong mau";
 	}
 
 	/**
