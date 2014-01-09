@@ -34,4 +34,25 @@ public class Constant {
 		R.raw.pink,
 		R.raw.white,
 		R.raw.black};
+	
+	public static final int[] SAD_IMG = {
+		R.drawable.sad1,
+		R.drawable.sad2,
+		R.drawable.sad3,
+		R.drawable.sad4,
+		R.drawable.sad5,
+		R.drawable.sad6
+	
+	};
+	
+	public static final int[] SMILE_IMG = {
+		R.drawable.smile1,
+		R.drawable.smile2,
+		R.drawable.smile3,
+		R.drawable.smile4,
+		R.drawable.smile5,
+		R.drawable.smile6,
+		R.drawable.smile7
+	};
+	
 }
