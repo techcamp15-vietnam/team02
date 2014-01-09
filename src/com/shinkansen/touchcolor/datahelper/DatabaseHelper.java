@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-	private static final String DATABASE_NAME = "database1.db";
+	private static final String DATABASE_NAME = "database2.db";
 	public static final String TABLE_RELATE_OBJECT = "RelateObject";
 	public static final String TABLE_COLOR = "Color";
 	public static final String COLUMN_ID = "id";

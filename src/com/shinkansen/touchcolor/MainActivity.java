@@ -19,7 +19,6 @@ import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -37,7 +36,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shinkansen.touchcolor.DataModel.RelateObject;
@@ -61,6 +59,7 @@ public class MainActivity extends Activity {
 	private String colorCatchedName = "red";
 	private Gallery gallery;
 	public static Handler mHandler;
+	private List<RelateObject> listObject;
 
 	
 	private RelateObjectDataSource relateObject;
@@ -85,7 +84,6 @@ public class MainActivity extends Activity {
 		previewLayout.addView(mPreview);
 		
 		//int sound manager
-		//SoundManager.getInstance().initSound(this);
 		
 		ivTransparent.setOnTouchListener(ontch);
 		
@@ -102,7 +100,7 @@ public class MainActivity extends Activity {
 		
 		relateObject = new RelateObjectDataSource(this);
 		
-		List<RelateObject> listObject = relateObject.getObjectsByColor("あかい");
+		listObject = relateObject.getObjectsByColor("あかい");
 		//RelateObjectDataSource.addSampleData(relateObject);
 		if (listObject.size() == 0){
 			RelateObjectDataSource.addSampleData(relateObject);
@@ -119,6 +117,7 @@ public class MainActivity extends Activity {
 		}
 				
 		gallery.setAdapter(new ImageAdapter(getApplicationContext(), pics));
+		gallery.setSelection(1);
 		gallery.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -162,8 +161,7 @@ public class MainActivity extends Activity {
 					}
 					
 					// show ralate object
-					
-					List<RelateObject> listObject = relateObject.getObjectsByColor(colorCatchedName);
+					listObject = relateObject.getObjectsByColor(colorCatchedName);
 					
 					Log.d("num of object", String.valueOf(listObject.size()));
 					
@@ -176,6 +174,7 @@ public class MainActivity extends Activity {
 					}
 							
 					gallery.setAdapter(new ImageAdapter(getApplicationContext(), pics));
+					gallery.setSelection(1);
 					gallery.setOnItemClickListener(new OnItemClickListener() {
 
 						@Override
@@ -445,6 +444,7 @@ public class MainActivity extends Activity {
 	@author huuthang
 	*/
 	private void showPopupImage(Integer imageResource, int position){
+		
     	AlertDialog.Builder dialog = new AlertDialog.Builder(this);
     	LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
     	View layout = inflater.inflate(R.layout.custom_popup_image, (ViewGroup) findViewById(R.id.layout_root));
@@ -453,13 +453,18 @@ public class MainActivity extends Activity {
     	ViewPager viewPager = (ViewPager) layout.findViewById(R.id.view_pager);
     	viewPager.setAdapter(new ImageViewPagerAdapter(this, pics));
     	viewPager.setCurrentItem(position);
+
     	dialog.setView(layout);
     	dialog.setCancelable(true);
+ 
     	
     	AlertDialog alertDialog = dialog.create();
     	alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
     	alertDialog.show();
-
+    	
+    	RelateObject obj = (RelateObject) listObject.get(position);
+    	int resId = getResources().getIdentifier("raw/"+ obj.getRObjectSoundPath(), "raw", getPackageName());
+    	SoundManager.getInstance().playSoundOfRelateObject(this, resId);
     	
     }
 	/**

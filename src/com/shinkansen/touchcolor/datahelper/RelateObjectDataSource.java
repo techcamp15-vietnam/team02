@@ -79,6 +79,7 @@ public class RelateObjectDataSource {
 		RelateObject testObj = new RelateObject();
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("do"+ i);
+			testObj.setObjectSoundPath("do"+ i);
 			testObj.setObjectColor("あかい");
 			
 			relateObject.addRelateObject(testObj);
@@ -86,48 +87,56 @@ public class RelateObjectDataSource {
 		
 		for (int i = 1; i < 3; i++){
 			testObj.setObjectImageName("trang"+ i);
+			testObj.setObjectSoundPath("trang"+ i);
 			testObj.setObjectColor("しろい");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("vang"+ i);
+			testObj.setObjectSoundPath("vang"+ i);
 			testObj.setObjectColor("きいろ");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("xanh"+ i);
+			testObj.setObjectSoundPath("xanh"+ i);
 			testObj.setObjectColor("みどり");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("tim"+ i);
+			testObj.setObjectSoundPath("tim" + i);
 			testObj.setObjectColor("パープル");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("den"+ i);
+			testObj.setObjectSoundPath("den"+ i);
 			testObj.setObjectColor("くろい");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("hong"+ i);
+			testObj.setObjectSoundPath("hong"+ i);
 			testObj.setObjectColor("ピンク");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 3; i++){
 			testObj.setObjectImageName("cam"+ i);
+			testObj.setObjectSoundPath("cam"+ i);
 			testObj.setObjectColor("オレンジ");
 			
 			relateObject.addRelateObject(testObj);
 		}
 		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("luc"+ i);
+			testObj.setObjectSoundPath("luc"+ i);
 			testObj.setObjectColor("あおい");
 			
 			relateObject.addRelateObject(testObj);
