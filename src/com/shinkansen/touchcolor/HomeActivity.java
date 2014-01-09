@@ -19,15 +19,14 @@ import com.shinkansen.touchcolor.soundmanager.SoundManager;
 public class HomeActivity extends Activity {
 	private AnimationDrawable animation1;
 	private ImageView imgAni1;
+	private AnimationDrawable animation2;
+	private ImageView imgAni2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 
-		SoundManager.getInstance().initSoundBackground(this);
-
-		SoundManager.getInstance().initSound(this);
 		imgAni1 = (ImageView) findViewById(R.id.animation1);
 		animation1 = (AnimationDrawable) imgAni1.getDrawable();
 		 
@@ -35,6 +34,14 @@ public class HomeActivity extends Activity {
 
         animation1.setVisible(true, true);
         animation1.start();
+        
+        imgAni2 = (ImageView) findViewById(R.id.logoView);
+		animation2 = (AnimationDrawable) imgAni2.getDrawable();
+		 
+        animation2.setCallback(imgAni2);
+
+        animation2.setVisible(true, true);
+        animation2.start();
 
 	}
 

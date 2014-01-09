@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		SoundManager.getInstance().initSound(this);
+		
 		ivTransparent = (ImageView) findViewById(R.id.ivTransparent);
 		
 		previewLayout = (FrameLayout) findViewById(R.id.preview);
@@ -126,6 +126,27 @@ public class MainActivity extends Activity {
 				showPopupImage(pics.get(arg2), arg2);
 			}
         });
+		
+		
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.d("MainActivity", "call onPause");
+		// Because the Camera object is a shared resource, it's very
+		// important to release it when the activity is paused.
+		if (mCamera != null) {
+			mPreview.setCamera(null);
+			mCamera.release();
+			mCamera = null;
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.d("MainActivity", "call onResume");
 		
 		mHandler = new Handler(){
 
@@ -187,25 +208,6 @@ public class MainActivity extends Activity {
 			}
 			
 		};
-	}
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		Log.d("MainActivity", "call onPause");
-		// Because the Camera object is a shared resource, it's very
-		// important to release it when the activity is paused.
-		if (mCamera != null) {
-			mPreview.setCamera(null);
-			mCamera.release();
-			mCamera = null;
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.d("MainActivity", "call onResume");
 		// Open the default i.e. the first rear facing camera.
 		if(mCamera == null){
 			mCamera = Camera.open();
