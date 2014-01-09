@@ -20,7 +20,7 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		SoundManager.getInstance().initSound(this);
+		SoundManager.getInstance().initSoundBackground(this);
 	}
 
 	@Override
