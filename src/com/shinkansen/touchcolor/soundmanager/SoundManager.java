@@ -76,6 +76,18 @@ public class SoundManager {
 	public void setTurnOffSoundBackground(int index) {
 		mSoundPool.stop(index);
 	}
+	public void setPauseSound(int index) {
+		mSoundPool.pause(index);
+	}
+	public void setResumSound(int index) {
+		mSoundPool.resume(index);
+	}
+	public void setPauseAllSound(){
+		mSoundPool.autoPause();
+	}
+	public void setStopSound(int index){
+		mSoundPool.stop(index);
+	}
 	
 	// use mediaplayer
 	
@@ -83,7 +95,10 @@ public class SoundManager {
 		MediaPlayer mediaPlayer = MediaPlayer.create(context, resId);
 		 try
          {
-			 mediaPlayer.start();
+			 if (!isTurnOffSound) {
+				 mediaPlayer.start();
+			 }
+			 
          }
          catch(Exception e)
          {

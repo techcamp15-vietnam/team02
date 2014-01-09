@@ -69,12 +69,15 @@ public class HomeActivity extends Activity {
 	public void buttonClick(View view) {
 		switch (view.getId()) {
 		case R.id.btnStudyColor: {
+			SoundManager.getInstance().setStopSound(1);
 			SoundManager.getInstance().playSound(13);
+
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			break;
 		}
 		case R.id.btnRememberColor: {
+			SoundManager.getInstance().setStopSound(1);
 			SoundManager.getInstance().playSound(14);
 			Intent intent = new Intent(this, PlayActivity.class);
 			startActivity(intent);
@@ -100,8 +103,6 @@ public class HomeActivity extends Activity {
 		dialog.setContentView(R.layout.help_dialog);
 		dialog.setTitle("Help");
 		
-		TextView text = (TextView) dialog.findViewById(R.id.help_text);
-		text.setText("Android custom dialog example!");
 		Button dialogButton = (Button) dialog.findViewById(R.id.s_btnOk);
 		// if button is clicked, close the custom dialog
 		dialogButton.setOnClickListener(new OnClickListener() {
@@ -117,6 +118,7 @@ public class HomeActivity extends Activity {
 	public void showSettingDialog() {
 		// custom dialog
 		final Dialog dialog = new Dialog(this);
+		boolean turnOffSound;
 		dialog.setContentView(R.layout.setting_dialog);
 		dialog.setTitle("Setting");
 		
@@ -136,8 +138,10 @@ public class HomeActivity extends Activity {
 			    	SharedPreferences.Editor editor = sharedPref.edit();
 			    	editor.putBoolean("turnOffSound", true);
 			    	editor.commit();
+			    	SoundManager.getInstance().setPauseSound(1);
 				}else{
 					SoundManager.getInstance().setTurnOffSound(false);
+					SoundManager.getInstance().setResumSound(1);
 					SharedPreferences sharedPref = getSharedPreferences("sound_data", MODE_PRIVATE);
 			    	SharedPreferences.Editor editor = sharedPref.edit();
 			    	editor.putBoolean("turnOffSound", false);
