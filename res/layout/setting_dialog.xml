@@ -7,19 +7,18 @@
         android:id="@+id/chkSound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="198dp"
-        android:layout_marginTop="78dp"
-        android:text="Sound" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        android:text="Turn off Sound" />
 
     <Button
         android:id="@+id/s_btnOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/chkSound"
         android:layout_below="@+id/chkSound"
-        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
         android:text="Ok" />
 
 </RelativeLayout>

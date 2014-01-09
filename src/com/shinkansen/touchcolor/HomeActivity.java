@@ -20,6 +20,7 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+		SoundManager.getInstance().initSound(this);
 	}
 
 	@Override
@@ -27,6 +28,13 @@ public class HomeActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		SoundManager.getInstance().playSound(1);
 	}
 
 	/**

@@ -20,12 +20,12 @@
     <ImageView
         android:id="@+id/ivShowColor"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="14dp"
         android:layout_marginTop="21dp"
-        android:src="@drawable/ic_launcher" />
+        android:background="@drawable/color_frame" />
 
     <TextView
         android:id="@+id/txtColorName"
@@ -40,12 +40,13 @@
 
     <Button
         android:id="@+id/btnPlaySound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_alignLeft="@+id/txtColorName"
         android:layout_below="@+id/txtColorName"
         android:layout_marginTop="18dp"
-        android:text="Sound" 
+        android:layout_marginRight="20dp"
+        android:background="@drawable/reload"
         android:onClick="onButtonClick"/>
 
     <ImageView

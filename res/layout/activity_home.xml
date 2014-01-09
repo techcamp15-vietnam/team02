@@ -11,42 +11,44 @@
         android:background="@drawable/bg1" />
 
     <Button
-        android:id="@+id/btnStudyColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="72dp"
-        android:text="Study" 
-        android:onClick="buttonClick"/>
-
-    <Button
         android:id="@+id/btnSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btnHelp"
-        android:layout_marginLeft="24dp"
-        android:layout_toRightOf="@+id/btnRememberColor"
-        android:text="Setting" 
-        android:onClick="buttonClick"/>
-
-    <Button
-        android:id="@+id/btnRememberColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnStudyColor"
-        android:layout_centerHorizontal="true"
-        android:text="Remember Color"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="23dp"
+        android:background="@drawable/config"
         android:onClick="buttonClick" />
 
     <Button
         android:id="@+id/btnHelp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnRememberColor"
-        android:layout_marginTop="16dp"
-        android:layout_toLeftOf="@+id/btnRememberColor"
-        android:text="Help"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/btnSetting"
+        android:layout_alignBottom="@+id/btnSetting"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/btnSetting"
+        android:background="@drawable/help"
         android:onClick="buttonClick" />
+
+    <Button
+        android:id="@+id/btnRememberColor"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/btnHelp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/remember"
+        android:onClick="buttonClick" />
+
+    <Button
+        android:id="@+id/btnStudyColor"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/btnRememberColor"
+        android:layout_alignLeft="@+id/btnRememberColor"
+        android:background="@drawable/study"
+        android:onClick="buttonClick" 
+        android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>
