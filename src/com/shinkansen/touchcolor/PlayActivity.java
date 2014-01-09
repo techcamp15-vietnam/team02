@@ -2,7 +2,6 @@ package com.shinkansen.touchcolor;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
@@ -13,7 +12,9 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.hardware.Camera;
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -23,14 +24,12 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.shinkansen.touchcolor.DataModel.RelateObject;
-import com.shinkansen.touchcolor.adapter.ImageAdapter;
 import com.shinkansen.touchcolor.constant.Constant;
 
 public class PlayActivity extends Activity {
@@ -45,6 +44,7 @@ public class PlayActivity extends Activity {
 	private FrameLayout previewLayout;
 	private String colorCatchedName;
 	private String colorCurrentName;
+	private ImageView imageCheck;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class PlayActivity extends Activity {
 		previewLayout = (FrameLayout) findViewById(R.id.play_preview);
 		txtColorName = (TextView) findViewById(R.id.txt_pColorName);
 		ivShowColor = (ImageView) findViewById(R.id.iv_pShowColor);
+		imageCheck = (ImageView) findViewById(R.id.imageCheck);
 		
 		//init camera
 		mPreview = new Preview(this);
@@ -80,28 +81,75 @@ public class PlayActivity extends Activity {
 					
 					float sx =(float) bmp.getWidth()/size.x;
 					float sy =(float) bmp.getHeight()/size.y;
-					x=(int)(x*sx);
-					y=(int)(y*sy);
-					Log.d("sss",x+"/"+y);					
-					int tch = bmp.getPixel(x, y);
+					
+					int xt=(int)(x*sx);
+					int yt=(int)(y*sy);
+//					Log.d("sss",x+"/"+y);					
+					int tch = bmp.getPixel(xt, yt);
 					ivShowColor.setBackgroundColor(tch);
+					
 					colorCatchedName = getBestMatchingColorName(tch);
-					//TextView tempView = (TextView)findViewById(R.id.textView1);
-					//tempView.setText(colorCatchedName);
-					//tempView.setTextColor(tch);
+					TextView tempimg = (TextView) findViewById(R.id.textView1);
+					tempimg.setText(colorCatchedName);
 								
-						if(colorCatchedName == colorCurrentName)
-						{
-							Log.d("aaaaaaaaaaa","dung mau");
-							int randIndex = randomColorIndex();
-							colorCurrentName = Constant.COLOR[randIndex];
-							ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
-							txtColorName.setText(colorCurrentName);
-							txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
-							
-						}
-						else
-							Log.d("aaaaaaaaaaa","sai mau");
+					if (colorCatchedName == colorCurrentName) {
+
+						
+						new CountDownTimer(1500, 1000) {
+
+							public void onTick(long millisUntilFinished) {
+								
+								imageCheck.setVisibility(View.VISIBLE);
+								int randIndex = randomImageCorrect();
+								imageCheck.setBackgroundResource(Constant.SMILE_IMG[randIndex]);
+								RelativeLayout.LayoutParams mParams = (RelativeLayout.LayoutParams) imageCheck.getLayoutParams();
+					            if(x-120>=0)
+					            	mParams.leftMargin = x-120;
+					            else
+					            	mParams.leftMargin = 0;
+					            if(y-120>=0)
+						            mParams.topMargin = y-120;
+					            else 
+						            mParams.topMargin = y-0;
+					            imageCheck.setLayoutParams(mParams);
+							}
+
+							public void onFinish() {
+								imageCheck.setVisibility(View.GONE);
+						int randIndex = randomColorIndex();
+						colorCurrentName = Constant.COLOR[randIndex];
+						ivShowColor
+								.setBackgroundColor(Constant.COLOR_ID[randIndex]);
+						txtColorName.setText(colorCurrentName);
+						txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
+							}
+						}.start();
+
+					} else {
+						new CountDownTimer(1500, 1000) { 
+
+							public void onTick(long millisUntilFinished) {
+								imageCheck.setVisibility(View.VISIBLE);
+								int randIndex = randomImageFail();
+								imageCheck
+										.setBackgroundResource(Constant.SAD_IMG[randIndex]);
+								RelativeLayout.LayoutParams mParams = (RelativeLayout.LayoutParams) imageCheck.getLayoutParams();
+								if(x-120>=0)
+					            	mParams.leftMargin = x-120;
+					            else
+					            	mParams.leftMargin = 0;
+					            if(y-120>=0)
+						            mParams.topMargin = y-120;
+					            else 
+						            mParams.topMargin = y-0;
+					            imageCheck.setLayoutParams(mParams);
+							}
+
+							public void onFinish() {
+								imageCheck.setVisibility(View.GONE);
+							}
+						}.start();
+					}
 				}
 			}
 			
@@ -150,6 +198,24 @@ public class PlayActivity extends Activity {
 	*/
 	public int randomColorIndex() {
 		int rand = (int)(Math.random()* Constant.COLOR.length);
+		return rand;
+	}
+	/**
+	 get random image on correct
+	@param 
+	@author 2A-duythanh
+	*/
+	public int randomImageCorrect() {
+		int rand = (int)(Math.random()* Constant.SMILE_IMG.length);
+		return rand;
+	}
+	/**
+	 get random image on fail
+	@param 
+	@author 2A-duythanh
+	*/
+	public int randomImageFail() {
+		int rand = (int)(Math.random()* Constant.SAD_IMG.length);
 		return rand;
 	}
 	/**
