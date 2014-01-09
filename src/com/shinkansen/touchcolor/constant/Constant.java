@@ -25,6 +25,7 @@ public class Constant {
 		Color.parseColor("#FFFFFF"),
 		Color.parseColor("#000000")};
 	public static final Integer[] SOUND_ID = {
+		R.raw.background,
 		R.raw.red,
 		R.raw.blue, 
 		R.raw.green, 
