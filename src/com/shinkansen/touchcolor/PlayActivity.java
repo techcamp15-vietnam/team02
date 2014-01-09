@@ -88,6 +88,8 @@ public class PlayActivity extends Activity {
 					int yt = (int) (y * sy);
 					// Log.d("sss",x+"/"+y);
 					int tch = bmp.getPixel(xt, yt);
+					bmp.recycle();
+					bmp=null;
 					ivShowColor.setBackgroundColor(tch);
 
 					colorCatchedName = getBestMatchingColorName(tch);
@@ -279,16 +281,20 @@ public class PlayActivity extends Activity {
 			x = (int) event.getX();
 			y = (int) event.getY();
 
-			switch (event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
+			try {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
 
-				Display display = getWindowManager().getDefaultDisplay();
-				size = new Point();
-				display.getSize(size);
-				mPreview.takePicture();
+					Display display = getWindowManager().getDefaultDisplay();
+					size = new Point();
+					display.getSize(size);
+					mPreview.takePicture();
 
-				break;
+					break;
 
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 
 			return true;

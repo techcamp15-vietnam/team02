@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
     
+    
+    
     <FrameLayout
         android:id="@+id/preview"
         android:layout_width="match_parent"
@@ -59,6 +61,7 @@
         android:layout_marginBottom="60dp"
         android:layout_marginRight="130dp"
         android:src="@drawable/frame_white" />
+    
 
     <Button
         android:id="@+id/btnPlay"

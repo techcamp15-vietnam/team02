@@ -19,6 +19,7 @@ import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -36,6 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shinkansen.touchcolor.DataModel.RelateObject;
@@ -133,6 +135,8 @@ public class MainActivity extends Activity {
 				if(msg.what == 1){
 					
 					Bitmap bmp = (Bitmap)msg.obj;
+					msg.obj=null;
+					
 					
 					float sx =(float) bmp.getWidth()/size.x;
 					float sy =(float) bmp.getHeight()/size.y;
@@ -141,6 +145,8 @@ public class MainActivity extends Activity {
 					x=(int)(x*sx);
 					y=(int)(y*sy);
 					int tch = bmp.getPixel(x, y);
+					bmp.recycle();
+					bmp=null;
 					ivShowColor.setBackgroundColor(tch);
 					colorCatchedName = getBestMatchingColorName(tch);
 					txtColorName.setText(colorCatchedName);
@@ -238,22 +244,24 @@ public class MainActivity extends Activity {
 		@Override
 		public boolean onTouch(View view, MotionEvent event) {
 			
-	
-			x = (int)event.getX();
-			y = (int)event.getY();
-			
-			switch (event.getAction()) {
+			x = (int) event.getX();
+			y = (int) event.getY();
+
+			try {
+				switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
-				
-				Display display = getWindowManager().getDefaultDisplay();
-				size = new Point();
-				display.getSize(size);
-				mPreview.takePicture();
-				
-				break;
-			
+
+					Display display = getWindowManager().getDefaultDisplay();
+					size = new Point();
+					display.getSize(size);
+					mPreview.takePicture();
+
+					break;
+
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-			
 			return true;
 		}
 	};

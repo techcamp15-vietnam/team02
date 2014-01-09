@@ -133,7 +133,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	@param  
 	@author duythanh
 	*/
-    //public static Bitmap  bitmap;
+//    public static Bitmap  bitmap;
     PictureCallback pictureCallback = new PictureCallback() {
 		
 		@Override
@@ -147,7 +147,6 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 				MainActivity.mHandler.sendMessage(msg);
 				mCamera.startPreview();
 			}
-			
 			
 		}
 	};
