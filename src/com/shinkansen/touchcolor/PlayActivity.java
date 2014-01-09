@@ -93,13 +93,12 @@ public class PlayActivity extends Activity {
 					colorCatchedName = getBestMatchingColorName(tch);
 					TextView tempimg = (TextView) findViewById(R.id.textView1);
 					tempimg.setText(colorCatchedName);
-
+					
 					if (colorCatchedName == colorCurrentName) {
-
+						SoundManager.getInstance().playSound(Constant.SOUND_ID.length-1);
 						new CountDownTimer(1500, 1000) {
-
+						
 							public void onTick(long millisUntilFinished) {
-
 								imageCheck.setVisibility(View.VISIBLE);
 								int randIndex = randomImageCorrect();
 								imageCheck
@@ -130,9 +129,11 @@ public class PlayActivity extends Activity {
 						}.start();
 
 					} else {
+						SoundManager.getInstance().playSound(Constant.SOUND_ID.length);
 						new CountDownTimer(1500, 1000) {
-
+							
 							public void onTick(long millisUntilFinished) {
+								
 								imageCheck.setVisibility(View.VISIBLE);
 								int randIndex = randomImageFail();
 								imageCheck
@@ -274,7 +275,7 @@ public class PlayActivity extends Activity {
 
 		@Override
 		public boolean onTouch(View view, MotionEvent event) {
-
+			
 			x = (int) event.getX();
 			y = (int) event.getY();
 
