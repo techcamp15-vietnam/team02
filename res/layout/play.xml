@@ -24,19 +24,19 @@
         android:text="Find" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnRememberColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ivTransparent"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/btnStudyColor"
         android:layout_marginBottom="30dp"
         android:text="Next" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnStudyColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/btnRememberColor"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="30dp"
         android:layout_marginRight="31dp"
@@ -54,7 +54,7 @@
         android:id="@+id/txtColorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
+        android:layout_alignRight="@+id/btnStudyColor"
         android:layout_below="@+id/btnNextColor"
         android:layout_marginTop="16dp"
         android:text="BLUE"

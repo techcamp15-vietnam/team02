@@ -17,12 +17,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
-        android:src="@drawable/background2" />
+        android:src="@drawable/active3" />
 
     <ImageView
         android:id="@+id/iv_pTransparent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
@@ -32,46 +32,42 @@
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
 
         <ImageView
             android:id="@+id/iv_pShowColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btn_p_play_sound"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/txt_pColorName"
-            android:layout_marginTop="21dp"
-            android:src="@drawable/ic_launcher" />
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="21dp" />
 
         <TextView
             android:id="@+id/txt_pColorName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btn_next"
-            android:layout_below="@+id/iv_pShowColor"
+            android:gravity="center"
             android:text="BLUE"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/btn_p_play_sound"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="39dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/reload" 
+            android:onClick="onButtonClick" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+			android:layout_marginLeft="20dp"
+            android:background="@drawable/next"
+            android:onClick="onButtonClick" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_p_play_sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout1"
-        android:layout_alignParentBottom="true"
-        android:text="Replay" />
-
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_p_play_sound"
-        android:layout_alignLeft="@+id/btn_p_play_sound"
-        android:layout_marginBottom="17dp"
-        android:onClick="onButtonClick"
-        android:text="Next" />
 
 </RelativeLayout>

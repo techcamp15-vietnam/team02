@@ -75,4 +75,50 @@ public class RelateObjectDataSource {
 		
 		return objects;
 	}
+	public static void addSampleData(RelateObjectDataSource relateObject){
+		RelateObject testObj = new RelateObject();
+		for (int i = 1; i < 5; i++){
+			testObj.setObjectImageName("do"+ i);
+			testObj.setObjectColor("red");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		
+		for (int i = 1; i < 3; i++){
+			testObj.setObjectImageName("trang"+ i);
+			testObj.setObjectColor("white");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		for (int i = 1; i < 5; i++){
+			testObj.setObjectImageName("vang"+ i);
+			testObj.setObjectColor("yellow");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		for (int i = 1; i < 5; i++){
+			testObj.setObjectImageName("xanh"+ i);
+			testObj.setObjectColor("green");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		for (int i = 1; i < 5; i++){
+			testObj.setObjectImageName("tim"+ i);
+			testObj.setObjectColor("purple");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		for (int i = 1; i < 5; i++){
+			testObj.setObjectImageName("den"+ i);
+			testObj.setObjectColor("black");
+			
+			relateObject.addRelateObject(testObj);
+		}
+		for (int i = 1; i < 3; i++){
+			testObj.setObjectImageName("cam"+ i);
+			testObj.setObjectColor("orange");
+			
+			relateObject.addRelateObject(testObj);
+		}
+	}
 }

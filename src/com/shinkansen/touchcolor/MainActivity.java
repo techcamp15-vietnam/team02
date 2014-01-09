@@ -22,6 +22,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Display;
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
 
 	private String colorCatchedName = "red";
 	private Gallery gallery;
+	public static Handler mHandler;
 
 	
 	private RelateObjectDataSource relateObject;
@@ -125,6 +127,54 @@ public class MainActivity extends Activity {
 			}
         });
 		
+		mHandler = new Handler(){
+
+			@Override
+			public void handleMessage(Message msg) {
+				if(msg.what == 1){
+					
+					Bitmap bmp = (Bitmap)msg.obj;
+					
+					float sx =(float) bmp.getWidth()/size.x;
+					float sy =(float) bmp.getHeight()/size.y;
+					
+					Log.d("size =", "witdth ="+bmp.getWidth() +"height="+ bmp.getHeight() + "x=" + size.x + "y"+ size.y );
+					x=(int)(x*sx);
+					y=(int)(y*sy);
+					int tch = bmp.getPixel(x, y);
+					ivShowColor.setBackgroundColor(tch);
+					colorCatchedName = getBestMatchingColorName(tch);
+					txtColorName.setText(colorCatchedName);
+
+					txtColorName.setTextColor(tch);
+					
+					// show ralate object
+					
+					List<RelateObject> listObject = relateObject.getObjectsByColor(colorCatchedName);
+					
+					Log.d("num of object", String.valueOf(listObject.size()));
+					
+					if (!pics.isEmpty()) pics.clear();
+					
+					for (RelateObject relateObject : listObject) {
+						String imgName = relateObject.getRObjectImageName();
+						int indexImg = getResources().getIdentifier(imgName, "drawable", getPackageName());
+						pics.add(indexImg);
+					}
+							
+					gallery.setAdapter(new ImageAdapter(getApplicationContext(), pics));
+					gallery.setOnItemClickListener(new OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+								long arg3) {
+							showPopupImage(pics.get(arg2), arg2);
+						}
+			        });
+				}
+			}
+			
+		};
 	}
 	
 	@Override
@@ -192,51 +242,7 @@ public class MainActivity extends Activity {
 				size = new Point();
 				display.getSize(size);
 				mPreview.takePicture();
-				final Handler handler = new Handler();
-		        handler.postDelayed(new Runnable() {
-		            @Override
-		            public void run() {		         
-		            	//Bitmap bmp = rotateImage(Preview.bitmap,90);
-						Bitmap bmp = Preview.bitmap;
-
-						float sx =(float) bmp.getWidth()/size.x;
-						float sy =(float) bmp.getHeight()/size.y;
-						/*x=(int)(x*sx);
-						y=(int)(y*sy);
-						int tch = bmp.getPixel(x, y);
-						ivShowColor.setBackgroundColor(tch);
-						colorCatchedName = getBestMatchingColorName(tch);
-						txtColorName.setText(colorCatchedName);
-
-						txtColorName.setTextColor(tch);
-						
-						// show ralate object
-						
-						List<RelateObject> listObject = relateObject.getObjectsByColor(colorCatchedName);
-						
-						Log.d("num of object", String.valueOf(listObject.size()));
-						
-						if (!pics.isEmpty()) pics.clear();
-						
-						for (RelateObject relateObject : listObject) {
-							String imgName = relateObject.getRObjectImageName();
-							int indexImg = getResources().getIdentifier(imgName, "drawable", getPackageName());
-							pics.add(indexImg);
-						}
-								
-						gallery.setAdapter(new ImageAdapter(getApplicationContext(), pics));
-						gallery.setOnItemClickListener(new OnItemClickListener() {
-
-							@Override
-							public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-									long arg3) {
-								showPopupImage(pics.get(arg2), arg2);
-							}
-				        });
-				        */
-		            }
-		        }, 500);
-		        
+				
 				break;
 			
 			}

@@ -2,8 +2,9 @@ package com.shinkansen.touchcolor;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import com.shinkansen.touchcolor.constant.Constant;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -21,10 +23,15 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.shinkansen.touchcolor.DataModel.RelateObject;
+import com.shinkansen.touchcolor.adapter.ImageAdapter;
+import com.shinkansen.touchcolor.constant.Constant;
 
 public class PlayActivity extends Activity {
 
@@ -62,6 +69,43 @@ public class PlayActivity extends Activity {
 		ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
 		txtColorName.setText(colorCurrentName);
 		txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
+		
+		MainActivity.mHandler = new Handler(){
+
+			@Override
+			public void handleMessage(Message msg) {
+				if(msg.what == 1){
+					
+					Bitmap bmp = (Bitmap)msg.obj;
+					
+					float sx =(float) bmp.getWidth()/size.x;
+					float sy =(float) bmp.getHeight()/size.y;
+					x=(int)(x*sx);
+					y=(int)(y*sy);
+					Log.d("sss",x+"/"+y);					
+					int tch = bmp.getPixel(x, y);
+					ivShowColor.setBackgroundColor(tch);
+					colorCatchedName = getBestMatchingColorName(tch);
+					//TextView tempView = (TextView)findViewById(R.id.textView1);
+					//tempView.setText(colorCatchedName);
+					//tempView.setTextColor(tch);
+								
+						if(colorCatchedName == colorCurrentName)
+						{
+							Log.d("aaaaaaaaaaa","dung mau");
+							int randIndex = randomColorIndex();
+							colorCurrentName = Constant.COLOR[randIndex];
+							ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
+							txtColorName.setText(colorCurrentName);
+							txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
+							
+						}
+						else
+							Log.d("aaaaaaaaaaa","sai mau");
+				}
+			}
+			
+		};
 		
 	}
 	@Override
@@ -156,41 +200,7 @@ public class PlayActivity extends Activity {
 				size = new Point();
 				display.getSize(size);
 				mPreview.takePicture();
-				final Handler handler = new Handler();
-		        handler.postDelayed(new Runnable() {
-		            @Override
-		            public void run() {		         
-						Bitmap bmp = Preview.bitmap;
-						Log.d("sss",bmp.getWidth()+"/"+bmp.getHeight()+"    "+x+"/"+y);
-						float sx =(float) bmp.getWidth()/size.x;
-						float sy =(float) bmp.getHeight()/size.y;
-						x=(int)(x*sx);
-						y=(int)(y*sy);
-						Log.d("sss",x+"/"+y);					
-						int tch = bmp.getPixel(x, y);
-						ivShowColor.setBackgroundColor(tch);
-						colorCatchedName = getBestMatchingColorName(tch);
-						TextView tempView = (TextView)findViewById(R.id.textView1);
-						tempView.setText(colorCatchedName);
-						tempView.setTextColor(tch);
-									
-							if(colorCatchedName == colorCurrentName)
-							{
-								Log.d("aaaaaaaaaaa","dung mau");
-								int randIndex = randomColorIndex();
-								colorCurrentName = Constant.COLOR[randIndex];
-								ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
-								txtColorName.setText(colorCurrentName);
-								txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
-								
-							}
-							else
-								Log.d("aaaaaaaaaaa","sai mau");
-						
-					
-						
-		            }
-		        }, 500);
+				
 				break;
 			
 			}
@@ -201,7 +211,6 @@ public class PlayActivity extends Activity {
 	/**
 	Get name Color of pixel
 	@param color: color of pixel(int)
-<<<<<<< HEAD
 	@author 2A-duythanh
 	*/
 

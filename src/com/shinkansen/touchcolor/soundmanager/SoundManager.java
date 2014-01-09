@@ -3,10 +3,10 @@
 import java.util.HashMap;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
-import com.shinkansen.touchcolor.R;
 import com.shinkansen.touchcolor.constant.Constant;
 
 public class SoundManager {
@@ -16,6 +16,7 @@ public class SoundManager {
     private AudioManager mAudioManager;
     private Context mContext;
     private static SoundManager soundInstance;
+    private boolean isTurnOffSound = false;
     
     public static synchronized SoundManager getInstance() {
 		if (soundInstance == null){
@@ -42,18 +43,24 @@ public class SoundManager {
     }
  
     public void playSound(int index) {
-        int streamVolume = mAudioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC);
-        mSoundPool.play(mSoundPoolMap.get(index), streamVolume, streamVolume,
-                1, 0, 1f);
+       if (!isTurnOffSound){
+    	   int streamVolume = mAudioManager
+                   .getStreamVolume(AudioManager.STREAM_MUSIC);
+           mSoundPool.play(mSoundPoolMap.get(index), streamVolume, streamVolume,
+                   1, 0, 1f);
+       }
     }
  
     public void playLoopedSound(int index) {
  
-        int streamVolume = mAudioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC);
-        mSoundPool.play(mSoundPoolMap.get(index), streamVolume, streamVolume,
-                1, -1, 1f);
+        if (!isTurnOffSound){
+        	int streamVolume = mAudioManager
+                    .getStreamVolume(AudioManager.STREAM_MUSIC);
+            mSoundPool.play(mSoundPoolMap.get(index), streamVolume, streamVolume,
+                    1, -1, 1f);
+        }
     }
- 
+    public void setTurnOffSound(boolean turnOff) {
+		isTurnOffSound = turnOff;
+	}
 }

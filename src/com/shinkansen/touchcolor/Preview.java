@@ -12,6 +12,7 @@ import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
 import android.hardware.Camera.Size;
 import android.os.Environment;
+import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -58,6 +59,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 
 	        mCamera.setParameters(parameters);
 	        mCamera.startPreview();
+	        Log.d("Preview", "start Preview");
 		}
 	}
 
@@ -78,6 +80,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		Log.d("Preview", "call destroy camera");
 		if (mCamera != null) {
             mCamera.stopPreview();
+            Log.d("Preview", "stop Preview");
         }
 	}
 
@@ -130,16 +133,21 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	@param  
 	@author duythanh
 	*/
-    public static Bitmap  bitmap;
+    //public static Bitmap  bitmap;
     PictureCallback pictureCallback = new PictureCallback() {
 		
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
-			String sFileName = createFileName();
-			if(sFileName.equals("")){
-				return;
+			Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
+			
+			if(bitmap != null){
+				Message msg = new Message();
+				msg.what = 1;
+				msg.obj = bitmap;
+				MainActivity.mHandler.sendMessage(msg);
+				mCamera.startPreview();
 			}
-			bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
+			
 			
 		}
 	};
@@ -164,6 +172,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
     	if(mCamera == null){
     		return;
     	}
+    	Log.d("Data", String.valueOf(1));
     	mCamera.takePicture(shutterCallback, rawCallback, pictureCallback);
     }
 
