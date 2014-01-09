@@ -1,0 +1,51 @@
+
+ 
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+ 
+    android:id="@+id/ani1"
+ 
+    android:oneshot="false" >
+ 
+ 
+ 
+    <item
+ 
+        android:drawable="@drawable/cloud1"
+ 
+        android:duration="150"/>
+       <item
+ 
+        android:drawable="@drawable/cloud2"
+ 
+        android:duration="150"/>
+          <item
+ 
+        android:drawable="@drawable/cloud3"
+ 
+        android:duration="150"/>
+             <item
+ 
+        android:drawable="@drawable/cloud4"
+ 
+        android:duration="150"/>
+             
+            <item
+ 
+        android:drawable="@drawable/cloud5"
+ 
+        android:duration="150"/>
+               <item
+ 
+        android:drawable="@drawable/cloud6"
+ 
+        android:duration="150"/>
+                  <item
+ 
+        android:drawable="@drawable/cloud7"
+ 
+        android:duration="150"/>
+    
+ 
+ 
+ 
+</animation-list>

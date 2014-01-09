@@ -60,4 +60,14 @@
         android:layout_toRightOf="@+id/btnStudyColor"
         android:src="@drawable/animation1" />
 
+    <ImageView
+        android:id="@+id/logoView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="-20dp"
+        android:layout_toLeftOf="@+id/btnRememberColor"
+        android:src="@drawable/animation2" />
+
 </RelativeLayout>
