@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 public class SplashScreen extends Activity { 
 	 // Splash screen timer
-    private static int SPLASH_TIME_OUT = 5000;
+    private static int SPLASH_TIME_OUT = 3000;
     private AnimationDrawable animation2;
 	private ImageView imgAni2;
     @Override

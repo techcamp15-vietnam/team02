@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
 		
 		relateObject = new RelateObjectDataSource(this);
 		
-		listObject = relateObject.getObjectsByColor("あかい");
+		listObject = relateObject.getObjectsByColor(colorString);
 		//RelateObjectDataSource.addSampleData(relateObject);
 		if (listObject.size() == 0){
 			RelateObjectDataSource.addSampleData(relateObject);
@@ -411,9 +411,6 @@ public class MainActivity extends Activity {
 	*/
 	public void onButtonClick(View view) {
 		switch (view.getId()) {
-		case R.id.btnMenu:
-			
-			break;
 		case R.id.btnPlaySound:{
 			for (int i = 0; i < Constant.COLOR.length; i++) {
 				Log.d("Compare", Constant.COLOR[i] + "//" + colorCatchedName);
@@ -424,7 +421,8 @@ public class MainActivity extends Activity {
 			}
 			break;
 		}
-		case R.id.btnPlay:{
+		case R.id.btnNextRememberScreen:{
+			
 			if (mCamera != null) {
 				mPreview.setCamera(null);
 				mCamera.release();

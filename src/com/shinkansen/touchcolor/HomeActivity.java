@@ -101,7 +101,7 @@ public class HomeActivity extends Activity {
 		// custom dialog
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.help_dialog);
-		dialog.setTitle("Help");
+		dialog.setTitle("マニュアル");
 		
 		Button dialogButton = (Button) dialog.findViewById(R.id.s_btnOk);
 		// if button is clicked, close the custom dialog
@@ -120,7 +120,7 @@ public class HomeActivity extends Activity {
 		final Dialog dialog = new Dialog(this);
 		boolean turnOffSound;
 		dialog.setContentView(R.layout.setting_dialog);
-		dialog.setTitle("Setting");
+		dialog.setTitle("設定");
 		
 		// get setting's used last time
 		SharedPreferences sharedPref = getSharedPreferences("sound_data", MODE_PRIVATE);

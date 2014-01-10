@@ -85,7 +85,7 @@ public class RelateObjectDataSource {
 			relateObject.addRelateObject(testObj);
 		}
 		
-		for (int i = 1; i < 3; i++){
+		for (int i = 1; i < 5; i++){
 			testObj.setObjectImageName("trang"+ i);
 			testObj.setObjectSoundPath("trang"+ i);
 			testObj.setObjectColor("しろい");

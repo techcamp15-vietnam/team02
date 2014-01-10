@@ -90,14 +90,16 @@ public class PlayActivity extends Activity {
 					int tch = bmp.getPixel(xt, yt);
 					bmp.recycle();
 					bmp=null;
-					ivShowColor.setBackgroundColor(tch);
 
 					colorCatchedName = getBestMatchingColorName(tch);
-					TextView tempimg = (TextView) findViewById(R.id.textView1);
-					tempimg.setText(colorCatchedName);
+					//TextView tempimg = (TextView) findViewById(R.id.textView1);
+					//tempimg.setText(colorCatchedName);
 					
-					if (colorCatchedName == colorCurrentName) {
-						SoundManager.getInstance().playSound(Constant.SOUND_ID.length-1);
+					//Log.d("EEEEE", "|"+colorCatchedName+"|"+colorCurrentName+"|"+colorCatchedName.length()+"|"+colorCurrentName.length());
+					
+					if (colorCatchedName.equals(colorCurrentName)) {
+						SoundManager.getInstance().setPauseAllSound();
+						SoundManager.getInstance().playSound(Constant.SOUND_ID.length-3);
 						new CountDownTimer(1500, 1000) {
 						
 							public void onTick(long millisUntilFinished) {
@@ -122,24 +124,22 @@ public class PlayActivity extends Activity {
 								imageCheck.setVisibility(View.GONE);
 								int randIndex = randomColorIndex();
 								colorCurrentName = Constant.COLOR[randIndex];
-								ivShowColor
-										.setBackgroundColor(Constant.COLOR_ID[randIndex]);
+								ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
 								txtColorName.setText(colorCurrentName);
-								txtColorName
-										.setTextColor(Constant.COLOR_ID[randIndex]);
+								txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
 							}
 						}.start();
 
 					} else {
-						SoundManager.getInstance().playSound(Constant.SOUND_ID.length);
+						SoundManager.getInstance().setPauseAllSound();
+						SoundManager.getInstance().playSound(Constant.SOUND_ID.length-2);
 						new CountDownTimer(1500, 1000) {
 							
 							public void onTick(long millisUntilFinished) {
 								
 								imageCheck.setVisibility(View.VISIBLE);
 								int randIndex = randomImageFail();
-								imageCheck
-										.setBackgroundResource(Constant.SAD_IMG[randIndex]);
+								imageCheck.setBackgroundResource(Constant.SAD_IMG[randIndex]);
 								RelativeLayout.LayoutParams mParams = (RelativeLayout.LayoutParams) imageCheck
 										.getLayoutParams();
 								if (x - 120 >= 0)
@@ -251,13 +251,13 @@ public class PlayActivity extends Activity {
 		}
 		case R.id.btn_next: {
 			randIndex = randomColorIndex();
-			String colorString = Constant.COLOR[randIndex];
-			Log.d("color rand", colorString);
+			colorCurrentName = Constant.COLOR[randIndex];
+			
 			ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
-			txtColorName.setText(colorString);
+			txtColorName.setText(colorCurrentName);
 			txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
 			SoundManager.getInstance().playSound(randIndex + 2);
-
+	
 			break;
 		}
 

@@ -36,7 +36,10 @@ public class Constant {
 		R.raw.white,
 		R.raw.black,
 		R.raw.corect,
-		R.raw.incorrect};
+		R.raw.incorrect,
+		R.raw.study,
+		R.raw.remember
+		};
 	
 	public static final int[] SAD_IMG = {
 		R.drawable.sad1,
