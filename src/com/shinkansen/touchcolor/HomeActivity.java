@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.shinkansen.touchcolor.soundmanager.SoundManager;
 
@@ -59,6 +59,16 @@ public class HomeActivity extends Activity {
 		SoundManager.getInstance().playSound(1);
 	}
 
+	@Override 
+	public boolean onKeyDown(int keyCode, KeyEvent event)  { 
+	    if (keyCode == KeyEvent.KEYCODE_BACK) { 
+	    	SoundManager.getInstance().setTurnOffSoundBackground(1);
+	    	HomeActivity.this.finish();
+	        return true; 
+	    } 
+
+	    return super.onKeyDown(keyCode, event); 
+	}
 	/**
 	 * Event when button click
 	 * 
