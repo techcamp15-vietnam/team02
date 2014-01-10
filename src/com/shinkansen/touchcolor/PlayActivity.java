@@ -6,27 +6,27 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.hardware.Camera;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +42,7 @@ public class PlayActivity extends Activity {
 	private TextView txtColorName;
 	private ImageView ivShowColor;
 	private ImageView ivTransparent;
+	private ImageView ivHelp;
 	private FrameLayout previewLayout;
 	private String colorCatchedName;
 	private String colorCurrentName;
@@ -59,6 +60,7 @@ public class PlayActivity extends Activity {
 		txtColorName = (TextView) findViewById(R.id.txt_pColorName);
 		ivShowColor = (ImageView) findViewById(R.id.iv_pShowColor);
 		imageCheck = (ImageView) findViewById(R.id.imageCheck);
+		ivHelp = (ImageView) findViewById(R.id.imgHelp);
 
 		// init camera
 		mPreview = new Preview(this);
@@ -72,6 +74,17 @@ public class PlayActivity extends Activity {
 		ivShowColor.setBackgroundColor(Constant.COLOR_ID[randIndex]);
 		txtColorName.setText(colorCurrentName);
 		txtColorName.setTextColor(Constant.COLOR_ID[randIndex]);
+		
+		new CountDownTimer(4000, 1000) {
+			
+			public void onTick(long millisUntilFinished) {
+				ivHelp.setVisibility(View.VISIBLE);
+				ivHelp.setBackgroundResource(R.drawable.help1);
+			}
+			public void onFinish() {
+				ivHelp.setVisibility(View.GONE);
+			}
+		}.start();
 
 		MainActivity.mHandler = new Handler() {
 
@@ -164,7 +177,6 @@ public class PlayActivity extends Activity {
 		};
 
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
